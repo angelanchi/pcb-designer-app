@@ -1,15 +1,13 @@
 {
   "files": {
-    "main.css": "/pcb-designer-app/static/css/main.5b5e6e2c.css",
-    "main.js": "/pcb-designer-app/static/js/main.a4860b37.js",
-    "static/js/453.f8152f4a.chunk.js": "/pcb-designer-app/static/js/453.f8152f4a.chunk.js",
+    "main.css": "/pcb-designer-app/static/css/main.03c1bc7e.css",
+    "main.js": "/pcb-designer-app/static/js/main.7d92352d.js",
     "index.html": "/pcb-designer-app/index.html",
-    "main.5b5e6e2c.css.map": "/pcb-designer-app/static/css/main.5b5e6e2c.css.map",
-    "main.a4860b37.js.map": "/pcb-designer-app/static/js/main.a4860b37.js.map",
-    "453.f8152f4a.chunk.js.map": "/pcb-designer-app/static/js/453.f8152f4a.chunk.js.map"
+    "main.03c1bc7e.css.map": "/pcb-designer-app/static/css/main.03c1bc7e.css.map",
+    "main.7d92352d.js.map": "/pcb-designer-app/static/js/main.7d92352d.js.map"
   },
   "entrypoints": [
-    "static/css/main.5b5e6e2c.css",
-    "static/js/main.a4860b37.js"
+    "static/css/main.03c1bc7e.css",
+    "static/js/main.7d92352d.js"
   ]
 }
