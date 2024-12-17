@@ -7,6 +7,11 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ResponsiveContainer,
+  ComposedChart,
+  Line,
+  Scatter,
+  Cell,
 } from 'recharts';
 // 材料數據庫
 import { MATERIALS_DATABASE } from '../constants/materials';
@@ -35,14 +40,23 @@ const materialTypes = Object.entries(MATERIALS_DATABASE).map(([key, value]) => (
   const parameters = [  
     { id: 1, name: "材料類型", key: "materialType" },   
     { id: 2, name: "型號", key: "name" },
+    { id: 3, name: "厚度", key: "thickness", unit: "μm" },  
+    { id: 4, name: "介電常數", key: "dk" },  
+    { id: 5, name: "損耗因數", key: "df" },  
+    { id: 6, name: "楊氏模數", key: "youngModulus", unit: "MPa" },
+    { id: 7, name: "剝離強度", key: "peelStrength", unit: "kN/m" },
+    { id: 8, name: "製造日期", key: "manufacturingDate" },  
+    { id: 9, name: "測試日期", key: "testingDate" },  
+  ];  
+  
+  // 定義數值型參數列表
+  const numericParameters = [
     { id: 3, name: "厚度", key: "thickness" },  
     { id: 4, name: "介電常數", key: "dk" },  
     { id: 5, name: "損耗因數", key: "df" },  
     { id: 6, name: "楊氏模數", key: "youngModulus" }, 
     { id: 7, name: "剝離強度", key: "peelStrength" }, 
-    { id: 7, name: "製造日期", key: "manufacturingDate" },  
-    { id: 8, name: "測試日期", key: "testingDate" },  
-  ];  
+  ];
   
   // 選擇區域組件  
   // 用於顯示材料類型和參數的選擇界面  
@@ -135,37 +149,167 @@ const materialTypes = Object.entries(MATERIALS_DATABASE).map(([key, value]) => (
   
   // 圖表組件  
   // 用於可視化顯示選定的參數數據  
-  const DataChart = ({ filteredData, selectedParams }) => (  
-    <div className="p-4 bg-white rounded-lg shadow">  
-      <h2 className="text-lg font-bold mb-4">參數分析圖表</h2>  
-      <div className="w-full overflow-x-auto">  
-        <BarChart   
-          width={800}   
-          height={400}   
-          data={filteredData}  
-          margin={{ top: 20, right: 30, left: 20, bottom: 5 }}  
-        >  
-          <CartesianGrid strokeDasharray="3 3" />  
-          <XAxis dataKey="name" />  
-          <YAxis />  
-          <Tooltip />  
-          <Legend />  
-          {parameters  
-            .filter(param => selectedParams.includes(param.id))  
-            .map((param) => (  
-              <Bar  
-                key={param.id}  
-                dataKey={param.key}  
-                name={param.name}  
-                fill={CHART_COLORS[param.key] || `hsl(${param.id * 45}, 70%, 50%)`}  
-                barSize={35}  
-              />  
-            ))}  
-        </BarChart>  
-      </div>  
-    </div>  
-  );  
-  
+  const DataChart = ({ filteredData, selectedParams }) => {
+    const selectedNumericParams = parameters
+      .filter(param => 
+        selectedParams.includes(param.id) && 
+        numericParameters.some(np => np.id === param.id)
+      );
+
+    if (selectedNumericParams.length === 0) {
+      return null;
+    }
+
+    // 計算每個參數的數值範圍
+    const getValueRange = (param) => {
+      const values = filteredData.map(item => item[param.key]).filter(val => val != null);
+      return {
+        min: Math.min(...values),
+        max: Math.max(...values),
+        range: Math.max(...values) - Math.min(...values)
+      };
+    };
+
+    // 將參數分配到左右軸
+    const assignAxes = (params) => {
+      if (params.length <= 1) return { leftAxis: params, rightAxis: [] };
+      
+      const ranges = params.map(param => ({
+        ...param,
+        ...getValueRange(param)
+      }));
+
+      // 按數值範圍排序
+      ranges.sort((a, b) => b.range - a.range);
+      
+      return {
+        leftAxis: [ranges[0]],
+        rightAxis: ranges.slice(1)
+      };
+    };
+
+    const { leftAxis, rightAxis } = assignAxes(selectedNumericParams);
+
+    return (
+      <div className="w-full p-4 bg-white rounded-lg shadow">
+        <h2 className="text-lg font-bold mb-4">參數分析圖表</h2>
+        <div className="w-full">
+          <ResponsiveContainer width="100%" height={500}>
+            <ComposedChart
+              data={filteredData}
+              margin={{ top: 20, right: 50, left: 50, bottom: 60 }}
+            >
+              <CartesianGrid strokeDasharray="3 3" />
+              <XAxis 
+                dataKey="name" 
+                angle={-30}
+                textAnchor="end"
+                height={60}
+              />
+              <YAxis 
+                yAxisId="left"
+                orientation="left"
+                label={{ 
+                  value: leftAxis.map(p => `${p.name} (${p.unit})`).join(', '), 
+                  angle: -90, 
+                  position: 'insideLeft',
+                  offset: -35,
+                  style: {
+                    textAnchor: 'middle',
+                    fill: '#666',
+                    fontSize: 14
+                  }
+                }}
+              />
+              {rightAxis.length > 0 && (
+                <YAxis 
+                  yAxisId="right"
+                  orientation="right"
+                  label={{ 
+                    value: rightAxis.map(p => `${p.name} (${p.unit})`).join(', '), 
+                    angle: 90, 
+                    position: 'insideRight',
+                    offset: -35,
+                    style: {
+                      textAnchor: 'middle',
+                      fill: '#666',
+                      fontSize: 14
+                    }
+                  }}
+                />
+              )}
+              <Tooltip content={<CustomTooltip />} />
+              <Legend 
+                wrapperStyle={{ 
+                  paddingTop: "40px",
+                  paddingBottom: "20px",
+                  bottom: -20
+                }}
+                iconType="circle"
+                verticalAlign="bottom"
+                align="center"
+              />
+              
+              {/* 左軸參數使用柱狀圖 */}
+              {leftAxis.map((param) => (
+                <Bar
+                  key={param.id}
+                  yAxisId="left"
+                  dataKey={param.key}
+                  name={`${param.name} (${param.unit})`}
+                  fill={CHART_COLORS[param.key] || `hsl(${param.id * 45}, 70%, 50%)`}
+                  barSize={35}
+                />
+              ))}
+
+              {/* 右軸參數使用散佈圖 */}
+              {rightAxis.map((param) => (
+                <Scatter
+                  key={param.id}
+                  yAxisId="right"
+                  dataKey={param.key}
+                  name={`${param.name} (${param.unit})`}
+                  fill={CHART_COLORS[param.key] || `hsl(${param.id * 45}, 70%, 50%)`}
+                  line={false}
+                  shape={(props) => {
+                    const { cx, cy } = props;
+                    return (
+                      <circle 
+                        cx={cx} 
+                        cy={cy} 
+                        r={6} 
+                        fill={props.fill}
+                      />
+                    );
+                  }}
+                  legendType="circle"
+                />
+              ))}
+            </ComposedChart>
+          </ResponsiveContainer>
+        </div>
+      </div>
+    );
+  };
+  // 自定義提示框組件
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-2 border border-gray-200 shadow-md">
+          <p className="font-bold">{label}</p>
+          {payload.map((entry, index) => {
+            const paramInfo = parameters.find(p => p.key === entry.dataKey);
+            return (
+              <p key={index} style={{ color: entry.color }}>
+                {`${entry.name}: ${entry.value} ${paramInfo?.unit || ''}`}
+              </p>
+            );
+          })}
+        </div>
+      );
+    }
+    return null;
+  };
   // 主應用組件  
   // 整合所有功能並管理應用狀態  
   // MaterialFinderApp.jsx  

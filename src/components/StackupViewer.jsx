@@ -5,7 +5,8 @@ export default function EnhancedFPCStackupViewer() {
   const [selectedStackup, setSelectedStackup] = useState(null)  
   const [searchTerm, setSearchTerm] = useState("")  
   const [showLegend, setShowLegend] = useState(false)  
-  
+  const [imageSearch, setImageSearch] = useState(null)
+
   const stackups = {  
     "version": "1.1",  
     "last_updated": "2024-12-16",  
@@ -16,11 +17,11 @@ export default function EnhancedFPCStackupViewer() {
         "description": "適合高速單端信號傳輸，具有良好的阻抗控制和EMI屏蔽效果",  
         "category": "高速單端",  
         "layers": [  
-          {"material": "EMI_Shield", "thickness": 12, "unit": "um"},  
-          {"material": "PTFE_LowDk", "thickness": 75, "unit": "um"},  
-          {"material": "Copper_Signal", "thickness": 12, "unit": "um"},  
-          {"material": "PI_Core", "thickness": 50, "unit": "um"},  
-          {"material": "Copper_Ground", "thickness": 18, "unit": "um"},  
+          {"material": "EMI", "thickness": 12, "unit": "um"},  
+          {"material": "PTFE", "thickness": 75, "unit": "um"},  
+          {"material": "Copper", "thickness": 12, "unit": "um"},  
+          {"material": "PI", "thickness": 50, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
           {"material": "CoverLay", "thickness": 25, "unit": "um"}  
         ],  
         "electrical_params": {  
@@ -38,11 +39,11 @@ export default function EnhancedFPCStackupViewer() {
         "category": "高速差分",  
         "layers": [  
           {"material": "CoverLay", "thickness": 25, "unit": "um"},  
-          {"material": "Copper_DiffPair", "thickness": 18, "unit": "um"},  
-          {"material": "PTFE_UltraLowLoss", "thickness": 100, "unit": "um"},  
-          {"material": "Copper_Ground", "thickness": 18, "unit": "um"},  
-          {"material": "PI_Core", "thickness": 50, "unit": "um"},  
-          {"material": "Copper_Ground", "thickness": 18, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
+          {"material": "PTFE", "thickness": 100, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
+          {"material": "PI", "thickness": 50, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
           {"material": "CoverLay", "thickness": 25, "unit": "um"}  
         ],  
         "electrical_params": {  
@@ -60,13 +61,13 @@ export default function EnhancedFPCStackupViewer() {
         "category": "混合信號",  
         "layers": [  
           {"material": "CoverLay", "thickness": 25, "unit": "um"},  
-          {"material": "Copper_Signal", "thickness": 18, "unit": "um"},  
-          {"material": "FR4_LowLoss", "thickness": 100, "unit": "um"},  
-          {"material": "Copper_Power", "thickness": 35, "unit": "um"},  
-          {"material": "FR4_Core", "thickness": 200, "unit": "um"},  
-          {"material": "Copper_Ground", "thickness": 35, "unit": "um"},  
-          {"material": "FR4_LowLoss", "thickness": 100, "unit": "um"},  
-          {"material": "Copper_Signal", "thickness": 18, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
+          {"material": "FR4", "thickness": 100, "unit": "um"},  
+          {"material": "Copper", "thickness": 35, "unit": "um"},  
+          {"material": "FR4", "thickness": 200, "unit": "um"},  
+          {"material": "Copper", "thickness": 35, "unit": "um"},  
+          {"material": "FR4", "thickness": 100, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
           {"material": "CoverLay", "thickness": 25, "unit": "um"}  
         ],  
         "electrical_params": {  
@@ -83,11 +84,11 @@ export default function EnhancedFPCStackupViewer() {
         "description": "專為RF信號傳輸優化，提供極低的損耗和出色的阻抗匹配",  
         "category": "射頻",  
         "layers": [  
-          {"material": "EMI_Shield", "thickness": 18, "unit": "um"},  
-          {"material": "PTFE_UltraLowLoss", "thickness": 125, "unit": "um"},  
-          {"material": "Copper_Signal", "thickness": 18, "unit": "um"},  
-          {"material": "PTFE_Core", "thickness": 200, "unit": "um"},  
-          {"material": "Copper_Ground", "thickness": 18, "unit": "um"},  
+          {"material": "Shield", "thickness": 18, "unit": "um"},  
+          {"material": "PTFE", "thickness": 125, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
+          {"material": "PTFE", "thickness": 200, "unit": "um"},  
+          {"material": "Copper", "thickness": 18, "unit": "um"},  
           {"material": "CoverLay", "thickness": 25, "unit": "um"}  
         ],  
         "electrical_params": {  
@@ -97,50 +98,164 @@ export default function EnhancedFPCStackupViewer() {
           "trace_spacing": {"value": 150, "unit": "um"},  
           "return_loss": {"value": -20, "unit": "dB"}  
         }  
+      },  
+      {  
+        "id": "highfreq_4layer",  
+        "name": "四層高頻 FPC",  
+        "layers": [  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 25, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 25, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 25, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" } 
+        ],  
+        "total_thickness": 347,  
+        "description": "四層高頻設計，適用於複雜的高頻電路布局",  
+        "electrical_params": {  
+          "insertion_loss": {"value": 0.35, "unit": "dB/inch", "frequency": "30GHz"},  
+          "impedance": {"value": 50, "tolerance": 3, "unit": "ohm"},  
+          "trace_width": {"value": 100, "unit": "um"},  
+          "trace_spacing": {"value": 100, "unit": "um"},  
+          "return_loss": {"value": -18, "unit": "dB"}  
+        }  
+      },  
+      {  
+        "id": "rf_groundedcoplanar",  
+        "name": "接地共面波導 FPC",  
+        "layers": [  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PTFE", "thickness": 50, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 35, "unit": "um" }
+        ],  
+        "total_thickness": 178,  
+        "description": "共面波導結構，適用於高頻信號傳輸和阻抗匹配",  
+        "electrical_params": {  
+          "insertion_loss": {"value": 0.22, "unit": "dB/inch", "frequency": "30GHz"},  
+          "impedance": {"value": 50, "tolerance": 1.5, "unit": "ohm"},  
+          "trace_width": {"value": 200, "unit": "um"},  
+          "trace_spacing": {"value": 150, "unit": "um"},  
+          "return_loss": {"value": -22, "unit": "dB"}  
+        }  
+      },  
+      {  
+        "id": "highfreq_impedance",  
+        "name": "阻抗控制高頻 FPC",  
+        "layers": [  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 75, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 35, "unit": "um" } 
+        ],  
+        "total_thickness": 203,  
+        "description": "特殊設計的阻抗控制結構，適用於精確阻抗要求的高頻應用",  
+        "electrical_params": {  
+          "insertion_loss": {"value": 0.28, "unit": "dB/inch", "frequency": "30GHz"},  
+          "impedance": {"value": 50, "tolerance": 1, "unit": "ohm"},  
+          "trace_width": {"value": 175, "unit": "um"},  
+          "trace_spacing": {"value": 175, "unit": "um"},  
+          "return_loss": {"value": -25, "unit": "dB"}  
+        }  
+      },  
+      {  
+        "id": "rf_dualshield",  
+        "name": "雙遮罩射頻 FPC",  
+        "layers": [  
+          { "material": "Shield", "thickness": 12, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 50, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Shield", "thickness": 12, "unit": "um" }
+        ],  
+        "total_thickness": 210,  
+        "description": "雙層遮罩設計，提供優異的射頻屏蔽效果",  
+        "electrical_params": {  
+          "insertion_loss": {"value": 0.30, "unit": "dB/inch", "frequency": "30GHz"},  
+          "impedance": {"value": 50, "tolerance": 2, "unit": "ohm"},  
+          "trace_width": {"value": 125, "unit": "um"},  
+          "trace_spacing": {"value": 125, "unit": "um"},  
+          "return_loss": {"value": -23, "unit": "dB"}  
+        }  
+      },  
+      {  
+        "id": "highfreq_multilayer",  
+        "name": "多層高頻混合 FPC",  
+        "layers": [  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 25, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 35, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "PI", "thickness": 50, "unit": "um" },  
+          { "material": "Adhesive", "thickness": 25, "unit": "um" },  
+          { "material": "Copper", "thickness": 18, "unit": "um" },  
+          { "material": "CoverLay", "thickness": 25, "unit": "um" }  
+        ],  
+        "total_thickness": 296,  
+        "description": "多層混合結構，適用於高頻和一般信號混合應用",  
+        "electrical_params": {  
+          "insertion_loss": {"value": 0.32, "unit": "dB/inch", "frequency": "30GHz"},  
+          "impedance": {"value": 50, "tolerance": 2.5, "unit": "ohm"},  
+          "trace_width": {"value": 150, "unit": "um"},  
+          "trace_spacing": {"value": 150, "unit": "um"},  
+          "return_loss": {"value": -20, "unit": "dB"}  
+        }  
       }  
     ]  
   }  
 
   const MaterialColor = {  
-    "EMI_Shield": "#C0C0C0",  
-    "PTFE_LowDk": "#E6E6FA",  
-    "Copper_Signal": "#CD7F32",  
-    "PI_Core": "#FFA07A",  
-    "Copper_Ground": "#CD7F32",  
-    "CoverLay": "#90EE90",  
-    "FR4_LowLoss": "#98FB98",  
-    "Copper_DiffPair": "#CD7F32",  
-    "PI_Film": "#FFA07A",  
-    "Adhesive": "#FFEB3B",  
-    "PTFE": "#E6E6FA",  
-    "FR4_Core": "#98FB98",  
-    "Copper_Power": "#CD7F32",  
-    "PTFE_UltraLowLoss": "#E6E6FA",  
-    "PTFE_Core": "#E6E6FA"  
+  "Adhesive": "#F0E68C",
+  "CoverLay": "#98FB98",
+  "Copper": "#B87333",
+  "EMI": "#A9A9A9",
+  "FR4": "#D2B48C",
+  "LCP": "#DDA0DD",
+  "PI": "#FFE4B5",
+  "Prepreg": "#F5DEB3", 
+  "PTFE": "#87CEEB",
+  "Shield": "#808080",
+  "Stiffener": "#DEB887"
   }  
 
-  const MaterialNames = {  
-    "EMI_Shield": "EMI屏蔽層",  
-    "PTFE_LowDk": "低介電常數PTFE",  
-    "Copper_Signal": "信號銅箔層",  
-    "PI_Core": "聚醯亞胺芯層",  
-    "Copper_Ground": "接地銅箔層",  
-    "CoverLay": "保護層",  
-    "FR4_LowLoss": "低損耗FR4",  
-    "Copper_DiffPair": "差分對銅箔層",  
-    "PI_Film": "聚醯亞胺薄膜",  
-    "Adhesive": "黏著劑層",  
-    "PTFE": "聚四氟乙烯",  
-    "FR4_Core": "FR4芯層",  
-    "Copper_Power": "電源銅箔層",  
-    "PTFE_UltraLowLoss": "超低損耗PTFE",  
-    "PTFE_Core": "PTFE芯層"  
+  const MaterialNames = {
+    "Adhesive": "膠層",
+    "CoverLay": "覆蓋膜", 
+    "Copper": "銅箔",
+    "EMI": "EMI 層",
+    "FR4": "FR4",
+    "LCP": "LCP",
+    "PI": "PI",
+    "Prepreg": "預浸材料",
+    "PTFE": "PTFE", 
+    "Shield": "遮罩層",
+    "Stiffener": "補強板"
   }  
 
   const MaterialGroups = {  
-    "導體層": ["Copper_Signal", "Copper_Ground", "Copper_DiffPair", "Copper_Power", "EMI_Shield"],  
-    "介質層": ["PTFE_LowDk", "PI_Core", "FR4_LowLoss", "PTFE", "FR4_Core", "PTFE_UltraLowLoss", "PTFE_Core"],  
-    "功能層": ["CoverLay", "PI_Film", "Adhesive"]  
+    "導體層": ["Copper","EMI"],  
+    "介質層": ["PTFE", "PI", "FR4"],  
+    "功能層": ["CoverLay", "Adhesive"]  
   }  
 
   const CategoryBadge = ({ category }) => {  
@@ -161,7 +276,7 @@ export default function EnhancedFPCStackupViewer() {
   const MaterialLegend = () => (  
     <div className="bg-white border rounded-lg p-4 mb-6 shadow-sm">  
       <div className="flex items-center justify-between mb-4">  
-        <h3 className="font-medium text-lg">材料圖例</h3>  
+        <h3 className="font-medium text-lg">材料圖</h3>  
         <button  
           onClick={() => setShowLegend(false)}  
           className="text-gray-400 hover:text-gray-600"  
@@ -285,6 +400,13 @@ export default function EnhancedFPCStackupViewer() {
     stackup.description.toLowerCase().includes(searchTerm.toLowerCase())  
   )  
 
+  const handleImageSearch = (e) => {
+    const file = e.target.files[0]
+    if (file) {
+      setImageSearch(file)
+    }
+  }
+
   return (  
     <div className="p-6 max-w-7xl mx-auto">  
       <div className="flex justify-between items-center mb-6">  
@@ -300,16 +422,28 @@ export default function EnhancedFPCStackupViewer() {
             </button>  
           )}  
         </div>  
-        <div className="relative">  
-          <input  
-            type="text"  
-            placeholder="搜尋疊構..."  
-            value={searchTerm}  
-            onChange={(e) => setSearchTerm(e.target.value)}  
-            className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  
-          />  
-          <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />  
-        </div>  
+        <div className="relative flex gap-2">
+          <div className="relative">
+            <input  
+              type="text"  
+              placeholder="搜尋疊構..."  
+              value={searchTerm}  
+              onChange={(e) => setSearchTerm(e.target.value)}  
+              className="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"  
+            />  
+            <Search className="w-5 h-5 text-gray-400 absolute left-3 top-2.5" />  
+          </div>
+          
+          <label className="cursor-pointer flex items-center px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleImageSearch}
+              className="hidden"
+            />
+            <span>圖片搜尋</span>
+          </label>
+        </div>
       </div>  
 
       {showLegend && <MaterialLegend />}  
