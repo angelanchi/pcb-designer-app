@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/pcb-designer-app/static/css/main.03c1bc7e.css",
-    "main.js": "/pcb-designer-app/static/js/main.7d92352d.js",
+    "main.css": "/pcb-designer-app/static/css/main.d16174d6.css",
+    "main.js": "/pcb-designer-app/static/js/main.7439a056.js",
     "index.html": "/pcb-designer-app/index.html",
-    "main.03c1bc7e.css.map": "/pcb-designer-app/static/css/main.03c1bc7e.css.map",
-    "main.7d92352d.js.map": "/pcb-designer-app/static/js/main.7d92352d.js.map"
+    "main.d16174d6.css.map": "/pcb-designer-app/static/css/main.d16174d6.css.map",
+    "main.7439a056.js.map": "/pcb-designer-app/static/js/main.7439a056.js.map"
   },
   "entrypoints": [
-    "static/css/main.03c1bc7e.css",
-    "static/js/main.7d92352d.js"
+    "static/css/main.d16174d6.css",
+    "static/js/main.7439a056.js"
   ]
 }
