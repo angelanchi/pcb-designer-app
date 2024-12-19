@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import {
   Bar,
   XAxis,
@@ -83,16 +83,20 @@ const SelectionArea = ({ title, items, selectedItems, onItemChange }) => (
 // 數據表格組件  
 // 顯示所選材料的參數數據  
 const DataTable = ({
-  columnOrder,
-  filteredData,
-  selectedParams,
-  sortConfig,
-  onSort,
-  onDragStart,
-  onDragOver,
-  onDrop,
-  selectedRows,
-  onRowSelect
+  columnOrder,  
+  filteredData,  
+  selectedParams,  
+  sortConfig,  
+  onSort,  
+  onDragStart,  
+  onDragOver,  
+  onDrop,  
+  selectedRows,  
+  onRowSelect,  
+  rowOrder,  
+  onRowDragStart,  
+  onRowDragOver,  
+  onRowDrop
 }) => {  
 // 處理 CSV 導出  
 const handleCSVExport = () => {  
@@ -190,33 +194,43 @@ const handleCSVExport = () => {
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((row, index) => (
-            <tr key={index}>
-              <td className="border px-4 py-2">
-                <input
-                  type="checkbox"
-                  checked={selectedRows.includes(index)}
-                  onChange={() => {
-                    onRowSelect(
-                      selectedRows.includes(index)
-                        ? selectedRows.filter(id => id !== index)
-                        : [...selectedRows, index]
-                    );
-                  }}
-                  className="form-checkbox"
-                />
-              </td>
-              {columnOrder.map(colKey => {
-                const param = parameters.find(p => p.key === colKey);
-                return (['materialType', 'manufacturer', 'name'].includes(colKey) ||
-                  selectedParams.includes(param?.id)) && (
-                  <td key={colKey} className="border px-4 py-2">
-                    {row[colKey]}
-                  </td>
-                );
-              })}
-            </tr>
-          ))}
+          {(rowOrder.length > 0 ? rowOrder : Array.from({ length: filteredData.length }, (_, i) => i)).map((rowIndex, index) => {  
+            const row = filteredData[rowIndex];  
+            return (  
+              <tr  
+                key={rowIndex}  
+                draggable  
+                onDragStart={(e) => onRowDragStart(e, index)}  
+                onDragOver={(e) => onRowDragOver(e, index)}  
+                onDrop={(e) => onRowDrop(e, index)}  
+                className="hover:bg-gray-50 cursor-move"  
+              > 
+                <td className="border px-4 py-2">
+                  <input
+                    type="checkbox"
+                    checked={selectedRows.includes(rowIndex)}
+                    onChange={() => {
+                      onRowSelect(
+                        selectedRows.includes(rowIndex)
+                          ? selectedRows.filter(id => id !== rowIndex)
+                          : [...selectedRows, rowIndex]
+                      );
+                    }}
+                    className="form-checkbox"
+                  />
+                </td>
+                {columnOrder.map(colKey => {
+                  const param = parameters.find(p => p.key === colKey);
+                  return (['materialType', 'manufacturer', 'name'].includes(colKey) ||
+                    selectedParams.includes(param?.id)) && (
+                    <td key={colKey} className="border px-4 py-2">
+                      {row[colKey]}
+                    </td>
+                  );
+                })}
+              </tr>
+            );  
+          })}
         </tbody>
       </table>
       {/* 添加導出按鈕 */}  
@@ -445,6 +459,7 @@ const MaterialFinderApp = () => {
     )
   ]); // 列順序  
   const [selectedRows, setSelectedRows] = useState([]);
+  const [rowOrder, setRowOrder] = useState([]);
 
   // 處理材料選擇變更  
   const handleMaterialChange = (materialId) => {
@@ -499,10 +514,21 @@ const MaterialFinderApp = () => {
     return filtered;
   }, [selectedMaterials, sortConfig]);
 
+ 
+
   // 根據選中的行過濾數據用於圖表顯示
   const selectedData = useMemo(() => {
-    return selectedRows.map(index => filteredAndSortedData[index]);
-  }, [filteredAndSortedData, selectedRows]);
+    const orderedData = rowOrder.length > 0   
+      ? rowOrder.map(index => filteredAndSortedData[index])  
+      : filteredAndSortedData;  
+    return selectedRows.map(index => orderedData[index]);  
+  }, [filteredAndSortedData, rowOrder, selectedRows]);
+
+    // 在 MaterialFinderApp 組件中添加 useEffect  
+  useEffect(() => {  
+    // 當 filteredAndSortedData 更新時，重新初始化 rowOrder  
+    setRowOrder(Array.from({ length: filteredAndSortedData.length }, (_, i) => i));  
+  }, [filteredAndSortedData]);
 
   // 處理排序  
   const handleSort = (key) => {
@@ -536,7 +562,39 @@ const MaterialFinderApp = () => {
 
     setColumnOrder(newOrder);
   };
+  const handleRowDragStart = (e, index) => {  
+    e.dataTransfer.setData('text/plain', index);  
+  };  
+  
+  const handleRowDragOver = (e, index) => {  
+    e.preventDefault();  
+  };  
+  
+  const handleRowDrop = (e, targetIndex) => {  
+    e.preventDefault();  
+    const sourceIndex = parseInt(e.dataTransfer.getData('text/plain'));  
+    
+    if (sourceIndex === targetIndex) return;  
+  
+    const newOrder = rowOrder.length > 0   
+      ? [...rowOrder]  
+      : Array.from({ length: filteredAndSortedData.length }, (_, i) => i); 
+    
+    const [removed] = newOrder.splice(sourceIndex, 1);  
+    newOrder.splice(targetIndex, 0, removed);
+    
+    setRowOrder(newOrder);
+    // 更新選中行的索引  
+    const newSelectedRows = selectedRows.map(selected => {  
+      if (selected === sourceIndex) return targetIndex;  
+      if (selected > sourceIndex && selected <= targetIndex) return selected - 1;  
+      if (selected < sourceIndex && selected >= targetIndex) return selected + 1;  
+      return selected;  
+    });  
+    setSelectedRows(newSelectedRows);  
+  };  
 
+  
   return (
     <div className="p-4 max-w-[1200px] mx-auto">
       {/* 材料選擇區域 */}  
@@ -564,9 +622,13 @@ const MaterialFinderApp = () => {
         onSort={handleSort}  
         onDragStart={handleDragStart}  
         onDragOver={handleDragOver}  
-        selectedRows={selectedRows}  
-        onRowSelect={setSelectedRows} 
         onDrop={handleDrop}  
+        selectedRows={selectedRows}  
+        onRowSelect={setSelectedRows}  
+        rowOrder={rowOrder}  
+        onRowDragStart={handleRowDragStart}  
+        onRowDragOver={handleRowDragOver}  
+        onRowDrop={handleRowDrop}  
       />  
 
       {/* 圖表區域（僅在有選中參數和數據時顯示） */}  
@@ -580,4 +642,4 @@ const MaterialFinderApp = () => {
   );  
 }
 
-export default MaterialFinderApp; 
+export default MaterialFinderApp;
