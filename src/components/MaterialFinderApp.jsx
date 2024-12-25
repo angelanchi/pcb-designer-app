@@ -16,11 +16,14 @@ import { MATERIALS_DATABASE } from '../constants/materials';
 
 // 圖表顏色配置
 const CHART_COLORS = {
-  thickness: "#A76D9A",     // 柔和紫灰  
-  dk: "#D68A8A",           // 柔和玫瑰粉  
-  df: "#A9C6C6",           // 柔和青灰  
-  youngModulus: "#C2A76D",  // 柔和驼色  
-  peelStrength: "#B6C2A6"   // 柔和灰绿 
+  thickness: "#9B4C8F",     // 深紫紅  
+  dk: "#E67373",           // 亮玫瑰紅  
+  df: "#73B2B2",           // 湖水藍  
+  youngModulus: "#D4A04A",  // 金駝色  
+  peelStrength: "#8FB073",  // 橄欖綠
+  absorptionRate: "#4A90E6",    // 亮天藍  
+  thermalConductivity: "#8B4513", // 明橙色  
+  thermalExpansion: "#49B675"    // 翠綠色 
 };
 
 // 從材料數據庫生成材料類型列表  
@@ -38,16 +41,19 @@ const parameters = [
   { id: 2, name: "廠商", key: "manufacturer" },
   { id: 3, name: "型號", key: "name" },
   { id: 4, name: "厚度", key: "thickness", unit: "μm" },
-  { id: 5, name: "介電常數", key: "dk" },
-  { id: 6, name: "損耗因數", key: "df" },
-  { id: 7, name: "楊氏模數", key: "youngModulus", unit: "MPa" },
-  { id: 8, name: "剝離強度", key: "peelStrength", unit: "kN/m" },
-  { id: 9, name: "製造日期", key: "manufacturingDate" },
-  { id: 10, name: "測試日期", key: "testingDate" },
-  { id: 11, name: "評估數據", key: "assessmentdata" },
-  { id: 12, name: "評估報告", key: "assessmentreport" },
-  { id: 13, name: "廠商規格書", key: "supplierspecification" },
-  { id: 14, name: "TDS", key: "tds" },
+  { id: 5, name: "介電常數", key: "dk" , unit: ""},
+  { id: 6, name: "損耗因數", key: "df" , unit: ""},
+  { id: 7, name: "楊氏模數", key: "youngModulus", unit: "GPa" },
+  { id: 8, name: "剝離強度", key: "peelStrength", unit: "N/mm" },
+  { id: 9, name: "雷射光吸收率", key: "absorptionRate", unit: "" },
+  { id: 10, name: "熱傳導係數", key: "thermalConductivity", unit: "W/(m·K)" },
+  { id: 11, name: "熱膨脹係數", key: "thermalExpansion", unit: "ppm/°C" },
+  { id: 12, name: "製造日期", key: "manufacturingDate" },
+  { id: 13, name: "測試日期", key: "testingDate" },
+  { id: 14, name: "評估數據", key: "assessmentdata" },
+  { id: 15, name: "評估報告", key: "assessmentreport" },
+  { id: 16, name: "廠商規格書", key: "supplierspecification" },
+  { id: 17, name: "TDS", key: "tds" },
 ];
 
 // 定義數值型參數列表
@@ -57,6 +63,9 @@ const numericParameters = [
   { id: 6, name: "損耗因數", key: "df" },
   { id: 7, name: "楊氏模數", key: "youngModulus" },
   { id: 8, name: "剝離強度", key: "peelStrength" },
+  { id: 9, name: "雷射光吸收率", key: "absorptionRate"},
+  { id: 10, name: "熱傳導係數", key: "thermalConductivity" },
+  { id: 11, name: "熱膨脹係數", key: "thermalExpansion"},
 ];
 
 // 選擇區域組件  
