@@ -13,7 +13,10 @@ export const MATERIALS_DATABASE = {
         color: "#E6B17E",  
         manufacturer: "NIKKAN",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.85,  
+        thermalConductivity: 0.12,  
+        thermalExpansion: 20  
       },  
       {  
         name: "NIKKAN LF-8338R",  
@@ -25,7 +28,10 @@ export const MATERIALS_DATABASE = {
         color: "#E6B17E",  
         manufacturer: "NIKKAN",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.85,  
+        thermalConductivity: 0.12,  
+        thermalExpansion: 20 
       },  
       {  
         name: "UPILEX-50S",  
@@ -37,7 +43,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFD700",  
         manufacturer: "UBE",  
         manufacturingDate: "2024-11-20",  
-        testingDate: "2024-11-25"  
+        testingDate: "2024-11-25",
+        absorptionRate: 0.83,  
+        thermalConductivity: 0.29,  
+        thermalExpansion: 12  
       },  
       {  
         name: "APICAL-50N",  
@@ -49,7 +58,10 @@ export const MATERIALS_DATABASE = {
         color: "#DAA520",  
         manufacturer: "KANEKA",  
         manufacturingDate: "2024-11-22",  
-        testingDate: "2024-11-27"  
+        testingDate: "2024-11-27",
+        absorptionRate: 0.84,  
+        thermalConductivity: 0.26,  
+        thermalExpansion: 16 
       },  
       {  
         name: "KAPTON-200V",  
@@ -61,7 +73,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFA500",  
         manufacturer: "DuPont",  
         manufacturingDate: "2024-11-25",  
-        testingDate: "2024-11-30"  
+        testingDate: "2024-11-30",
+        absorptionRate: 0.85,  
+        thermalConductivity: 0.12,  
+        thermalExpansion: 20  
       },  
       {  
         name: "KF330",  
@@ -73,7 +88,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFB6C1",  
         manufacturer: "Kingfa",  
         manufacturingDate: "2024-11-28",  
-        testingDate: "2024-12-03"  
+        testingDate: "2024-12-03",
+        absorptionRate: 0.84,  
+        thermalConductivity: 0.15,  
+        thermalExpansion: 18  
       },  
       {  
         name: "TU767",  
@@ -85,7 +103,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFB6C1",  
         manufacturer: "Taiflex",  
         manufacturingDate: "2024-12-01",  
-        testingDate: "2024-12-06"  
+        testingDate: "2024-12-06",
+        absorptionRate: 0.84,  
+        thermalConductivity: 0.14,  
+        thermalExpansion: 19  
       }  
     ]  
   },  
@@ -103,7 +124,10 @@ export const MATERIALS_DATABASE = {
         color: "#F5F5DC",  
         manufacturer: "3M",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.90,  
+        thermalConductivity: 0.18,  
+        thermalExpansion: 150  
       },  
       {  
         name: "468MP",  
@@ -115,7 +139,10 @@ export const MATERIALS_DATABASE = {
         color: "#F5F5DC",  
         manufacturer: "3M",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.89,  
+        thermalConductivity: 0.17,  
+        thermalExpansion: 160  
       },  
       {  
         name: "467MP",  
@@ -127,7 +154,10 @@ export const MATERIALS_DATABASE = {
         color: "#F5F5DC",  
         manufacturer: "3M",  
         manufacturingDate: "2024-11-20",  
-        testingDate: "2024-11-25"  
+        testingDate: "2024-11-25",
+        absorptionRate: 0.89,  
+        thermalConductivity: 0.17,  
+        thermalExpansion: 155  
       }  
     ]  
   },  
@@ -145,7 +175,10 @@ export const MATERIALS_DATABASE = {
         color: "#A9A9A9",  
         manufacturer: "3M",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.75,  
+        thermalConductivity: 3.0,  
+        thermalExpansion: 90  
       },  
       {  
         name: "9712",  
@@ -157,7 +190,10 @@ export const MATERIALS_DATABASE = {
         color: "#A9A9A9",  
         manufacturer: "3M",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.75,  
+        thermalConductivity: 2.8,  
+        thermalExpansion: 95  
       }  
     ]  
   },  
@@ -175,7 +211,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFD700",  
         manufacturer: "UBE",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.83,  
+        thermalConductivity: 0.29,  
+        thermalExpansion: 12 
       },  
       {  
         name: "KAPTON HN",  
@@ -187,7 +226,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFD700",  
         manufacturer: "DuPont",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.85,  
+        thermalConductivity: 0.12,  
+        thermalExpansion: 20  
       }  
     ]  
   },  
@@ -205,7 +247,10 @@ export const MATERIALS_DATABASE = {
         color: "#000080",  
         manufacturer: "Taiyo",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.95,  
+        thermalConductivity: 0.20,  
+        thermalExpansion: 60  
       },  
       {  
         name: "PSR-4000 HS240",  
@@ -217,7 +262,10 @@ export const MATERIALS_DATABASE = {
         color: "#013220",  
         manufacturer: "Taiyo",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.95,  
+        thermalConductivity: 0.21,  
+        thermalExpansion: 58  
       },  
       {  
         name: "LOCTITE EDAG PF 050",  
@@ -229,7 +277,10 @@ export const MATERIALS_DATABASE = {
         color: "#000000",  
         manufacturer: "Henkel",  
         manufacturingDate: "2024-11-20",  
-        testingDate: "2024-11-25"  
+        testingDate: "2024-11-25",
+        absorptionRate: 0.93,  
+        thermalConductivity: 0.19,  
+        thermalExpansion: 62  
       },  
       {  
         name: "LOCTITE ECI 5000 E&C",  
@@ -241,7 +292,10 @@ export const MATERIALS_DATABASE = {
         color: "#013220",  
         manufacturer: "Henkel",  
         manufacturingDate: "2024-11-22",  
-        testingDate: "2024-11-27"  
+        testingDate: "2024-11-27",
+        absorptionRate: 0.94,  
+        thermalConductivity: 0.22,  
+        thermalExpansion: 59  
       }  
     ]  
   },  
@@ -259,7 +313,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFFFFF",  
         manufacturer: "Rogers",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.50,  
+        thermalExpansion: 17  
       },  
       {  
         name: "Rogers RT/duroid 5880",  
@@ -271,7 +328,10 @@ export const MATERIALS_DATABASE = {
         color: "#F0F0F0",  
         manufacturer: "Rogers",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.45,  
+        thermalExpansion: 31  
       },  
       {  
         name: "Taconic TLY-5",  
@@ -283,7 +343,10 @@ export const MATERIALS_DATABASE = {
         color: "#F8F8FF",  
         manufacturer: "Taconic",  
         manufacturingDate: "2024-11-20",  
-        testingDate: "2024-11-25"  
+        testingDate: "2024-11-25",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.40,  
+        thermalExpansion: 29  
       },  
       {  
         name: "CLTE-XT",  
@@ -295,7 +358,10 @@ export const MATERIALS_DATABASE = {
         color: "#F5F5F5",  
         manufacturer: "Arlon",  
         manufacturingDate: "2024-11-22",  
-        testingDate: "2024-11-27"  
+        testingDate: "2024-11-27",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.48,  
+        thermalExpansion: 19  
       },  
       {  
         name: "DiClad 880",  
@@ -307,7 +373,10 @@ export const MATERIALS_DATABASE = {
         color: "#FFFAFA",  
         manufacturer: "Arlon",  
         manufacturingDate: "2024-11-25",  
-        testingDate: "2024-11-30"  
+        testingDate: "2024-11-30",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.42,  
+        thermalExpansion: 30  
       }  
     ]  
   },  
@@ -325,7 +394,10 @@ export const MATERIALS_DATABASE = {
         color: "#DEB887",  
         manufacturer: "TUC",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.75,  
+        thermalConductivity: 0.30,  
+        thermalExpansion: 14  
       },  
       {  
         name: "NPG-170T",  
@@ -337,7 +409,10 @@ export const MATERIALS_DATABASE = {
         color: "#D2B48C",  
         manufacturer: "Nanya",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.75,  
+        thermalConductivity: 0.31,  
+        thermalExpansion: 13  
       },  
       {  
         name: "MCL-E-679F",  
@@ -349,7 +424,10 @@ export const MATERIALS_DATABASE = {
         color: "#BC8F8F",  
         manufacturer: "Hitachi",  
         manufacturingDate: "2024-11-20",  
-        testingDate: "2024-11-25"  
+        testingDate: "2024-11-25",
+        absorptionRate: 0.76,  
+        thermalConductivity: 0.32,  
+        thermalExpansion: 15  
       },  
       {  
         name: "S1000-2M",  
@@ -361,7 +439,10 @@ export const MATERIALS_DATABASE = {
         color: "#F4A460",  
         manufacturer: "Shengyi",  
         manufacturingDate: "2024-11-22",  
-        testingDate: "2024-11-27"  
+        testingDate: "2024-11-27",
+        absorptionRate: 0.75,  
+        thermalConductivity: 0.30,  
+        thermalExpansion: 14  
       },  
       {  
         name: "ITEQ IT-180A",  
@@ -373,7 +454,10 @@ export const MATERIALS_DATABASE = {
         color: "#DAA520",  
         manufacturer: "ITEQ",  
         manufacturingDate: "2024-11-25",  
-        testingDate: "2024-11-30"  
+        testingDate: "2024-11-30",
+        absorptionRate: 0.75,  
+        thermalConductivity: 0.31,  
+        thermalExpansion: 14  
       }  
     ]  
   },  
@@ -391,7 +475,10 @@ export const MATERIALS_DATABASE = {
         color: "#CD7F32",  
         manufacturer: "Mitsui",  
         manufacturingDate: "2024-11-15",  
-        testingDate: "2024-11-20"  
+        testingDate: "2024-11-20",
+        absorptionRate: 0.03,  
+        thermalConductivity: 385,  
+        thermalExpansion: 17 
       },  
       {  
         name: "Chang Chun VLP",  
@@ -403,7 +490,10 @@ export const MATERIALS_DATABASE = {
         color: "#B8860B",  
         manufacturer: "Chang Chun",  
         manufacturingDate: "2024-11-18",  
-        testingDate: "2024-11-23"  
+        testingDate: "2024-11-23",
+        absorptionRate: 0.03,  
+        thermalConductivity: 385,  
+        thermalExpansion: 17  
       },  
       {  
         name: "Furukawa C7025",  
@@ -415,7 +505,10 @@ export const MATERIALS_DATABASE = {
         color: "#CD853F",  
         manufacturer: "Furukawa",  
         manufacturingDate: "2024-11-21",  
-        testingDate: "2024-11-26"  
+        testingDate: "2024-11-26",
+        absorptionRate: 0.03,  
+        thermalConductivity: 385,  
+        thermalExpansion: 17  
       }  
     ]  
   },  
@@ -433,7 +526,10 @@ export const MATERIALS_DATABASE = {
         color: "#E6E6FA",  
         manufacturer: "Taconic",  
         manufacturingDate: "2024-11-25",  
-        testingDate: "2024-11-30"  
+        testingDate: "2024-11-30",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.45,  
+        thermalExpansion: 18  
       },  
       {  
         name: "TLY-5",  
@@ -445,7 +541,10 @@ export const MATERIALS_DATABASE = {
         color: "#E6E6FA",  
         manufacturer: "Taconic",  
         manufacturingDate: "2024-11-28",  
-        testingDate: "2024-12-03"  
+        testingDate: "2024-12-03",
+        absorptionRate: 0.02,  
+        thermalConductivity: 0.40,  
+        thermalExpansion: 19  
       }  
     ]  
   },  
@@ -463,7 +562,10 @@ export const MATERIALS_DATABASE = {
         color: "#C0C0C0",  
         manufacturer: "Tatsuta",  
         manufacturingDate: "2024-12-02",  
-        testingDate: "2024-12-07"  
+        testingDate: "2024-12-07",
+        absorptionRate: 0.70,  
+        thermalConductivity: 2.5,  
+        thermalExpansion: 25  
       },  
       {  
         name: "SF-PC3",  
@@ -475,16 +577,11 @@ export const MATERIALS_DATABASE = {
         color: "#C0C0C0",  
         manufacturer: "Tatsuta",  
         manufacturingDate: "2024-12-05",  
-        testingDate: "2024-12-10"  
+        testingDate: "2024-12-10",
+        absorptionRate: 0.70,  
+        thermalConductivity: 2.3,  
+        thermalExpansion: 27  
       } 
     ]  
   }
-};
-
-export const CHART_COLORS = {
-  thickness: "#8884d8",
-  dk: "#82ca9d",
-  df: "#ffc658",
-  youngModulus: "#ff7300",
-  peelStrength: "#82ca9d"
 };
