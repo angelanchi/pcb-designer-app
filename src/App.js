@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import MaterialStackApp from './components/MaterialStackApp';  
 import MaterialFinderApp from './components/MaterialFinderApp';  
 import ClaudeChatbox from './components/ClaudeChatbox';
-import StackupViewer from './components/StackupViewer';  
+
 
 const App = () => {  
   return (  
@@ -24,12 +24,7 @@ const App = () => {
                   >  
                     疊構設計器  
                   </Link>
-                  <Link  
-                    to="/stackup"  
-                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500"  
-                  >  
-                    疊構資料庫  
-                  </Link>  
+
                   <Link  
                     to="/finder"  
                     className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-900 hover:text-gray-500"  
@@ -54,7 +49,7 @@ const App = () => {
             <Routes>  
               <Route path="/" element={<HomePage />} />  
               <Route path="/stack" element={<MaterialStackApp />} />
-              <Route path="/stackup" element={<StackupViewer />} />  
+ 
               <Route path="/finder" element={<MaterialFinderApp />} />  
               <Route path="/chat" element={<ClaudeChatbox />} />  
             </Routes>  
