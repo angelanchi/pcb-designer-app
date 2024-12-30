@@ -114,6 +114,21 @@ const MaterialStackApp = () => {
     });
   };
 
+  const layerHeights = useMemo(() => {
+    const layersWithProperties = layers.map(layer => getLayerWithProperties(layer));
+    const thicknesses = layersWithProperties.map(layer => layer?.material?.thickness || 0);
+    const maxThickness = Math.max(...thicknesses);
+    const totalThickness = thicknesses.reduce((sum, t) => sum + t, 0);
+    const MIN_HEIGHT = 20;
+    const MAX_HEIGHT = 100;
+    const CONTAINER_HEIGHT = 400;
+    const scaleFactor = (CONTAINER_HEIGHT - layers.length) / totalThickness;
+    return thicknesses.map(thickness => {
+      const scaledHeight = thickness * scaleFactor;
+      return Math.max(MIN_HEIGHT, Math.min(MAX_HEIGHT, scaledHeight));
+    });
+  }, [layers]);
+
   const handleExport = () => {
     const prepareCSVContent = () => {
       const rows = [];
@@ -363,21 +378,29 @@ const MaterialStackApp = () => {
           </div>
           <div className="px-4 pb-4 pt-2">
             <div className="space-y-[0.5px] mb-6">
-              {layers.map((layer, index) => (
-                <div
-                  key={index}
-                  className="w-full rounded-sm flex items-center justify-between px-4 transition-all duration-200 hover:scale-x-[1.02]"
-                  style={{
-                    backgroundColor: MATERIAL_COLORS[layer.type] || '#e5e7eb',
-                    height: '40px',
-                    border: '1px solid #ddd',
-                    color: isLightColor(MATERIAL_COLORS[layer.type]) ? '#000' : '#fff',
-                  }}
-                >
-                  <span className="text-sm font-medium">{layer.materialName}</span>
-                  <span className="text-sm">{layer.description}</span>
-                </div>
-              ))}
+              {layers.map((layer, index) => {
+                const layerWithProps = getLayerWithProperties(layer);
+                const thickness = layerWithProps?.material?.thickness || 0;
+
+                return (
+                  <div
+                    key={index}
+                    className="w-full rounded-sm flex items-center justify-between px-4 transition-all duration-200 hover:scale-x-[1.02]"
+                    style={{
+                      backgroundColor: MATERIAL_COLORS[layer.type] || '#e5e7eb',
+                      height: `${layerHeights[index]}px`,
+                      border: '1px solid #ddd',
+                      color: isLightColor(MATERIAL_COLORS[layer.type]) ? '#000' : '#fff',
+                    }}
+                  >
+                    <div className="flex flex-col">
+                      <span className="text-sm font-medium">{layer.materialName}</span>
+                      <span className="text-xs opacity-75">{thickness}µm</span>
+                    </div>
+                    <span className="text-sm">{layer.description}</span>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
